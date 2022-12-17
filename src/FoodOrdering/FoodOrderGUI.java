@@ -51,7 +51,9 @@ public class FoodOrderGUI extends JFrame {
                 }
 
                 if (totalPrice == 0) {
-                    throw new Exception();
+                    throw new Exception("You must select an order to proceed.");
+                } else if (!rbNone.isSelected()) {
+                    throw new Exception("You must select a discount to proceed.");
                 }
 
                 totalPrice -= (totalPrice * discount);
@@ -59,7 +61,7 @@ public class FoodOrderGUI extends JFrame {
                 JOptionPane.showMessageDialog(btnOrder, "The total price is Php " + String.format("%.2f", totalPrice));
 
             } catch (Exception exc) {
-                JOptionPane.showMessageDialog(btnOrder, "You must select an order to proceed.");
+                JOptionPane.showMessageDialog(btnOrder, exc.getMessage());
             }
         });
     }
