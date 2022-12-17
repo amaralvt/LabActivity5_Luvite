@@ -14,8 +14,6 @@ public class LeapYearGUI extends JFrame {
             int year = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane mes = new JOptionPane();
-                //mes.setSize(200,200);
                 try {
                     year = Integer.parseInt(tfYear.getText());
                     int lyear = isLeapYear(year);
