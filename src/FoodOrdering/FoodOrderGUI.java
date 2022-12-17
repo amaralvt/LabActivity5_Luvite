@@ -1,8 +1,7 @@
 package FoodOrdering;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class FoodOrderGUI extends JFrame {
     private JPanel panel1;
@@ -17,8 +16,9 @@ public class FoodOrderGUI extends JFrame {
         group.add(rb10);
         group.add(rb15);
         group.add(rbNone);
-        btnOrder.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnOrder.addActionListener(e -> {
+
+            try {
                 double totalPrice = 0;
                 double discount = 0;
 
@@ -48,19 +48,27 @@ public class FoodOrderGUI extends JFrame {
                     discount = 0.10;
                 } else if (rb15.isSelected()) {
                     discount = 0.15;
-                } else discount = 0;
+                }
 
-                totalPrice -= (totalPrice*discount);
+                if (totalPrice == 0) {
+                    throw new Exception();
+                }
 
-                JOptionPane.showMessageDialog(btnOrder, "The total price is Php " + String.format("%.2f",totalPrice));
+                totalPrice -= (totalPrice * discount);
+
+                JOptionPane.showMessageDialog(btnOrder, "The total price is Php " + String.format("%.2f", totalPrice));
+
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(btnOrder, "You must select an order to proceed.");
             }
         });
     }
+
     public static void main(String[] args) {
         FoodOrderGUI order = new FoodOrderGUI();
         order.setTitle("Food Ordering System");
         order.setContentPane(order.panel1);
-        order.setSize(600,600);
+        order.setSize(600, 600);
         order.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         order.setVisible(true);
     }
