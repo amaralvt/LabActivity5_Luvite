@@ -16,20 +16,25 @@ public class LeapYearGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //JOptionPane mes = new JOptionPane();
                 //mes.setSize(200,200);
+                try {
+                    year = Integer.parseInt(tfYear.getText());
+                    int lyear = isLeapYear(year);
 
-                year = Integer.parseInt(tfYear.getText());
-                int lyear = isLeapYear(year);
-
-                if (lyear == 1) {
-                    // Show a JOptionPane with the message "Leap year"
-                    JOptionPane.showMessageDialog(btnCheckYear, "Leap year");
-                } else {
-                    // Show a JOptionPane with the message "Not a leap year"
-                    JOptionPane.showMessageDialog(btnCheckYear, "Not a leap year");
+                    if (year < 0) {
+                        throw new Exception();
+                    }
+                    if (lyear == 1) {
+                        // Show a JOptionPane with the message "Leap year"
+                        JOptionPane.showMessageDialog(btnCheckYear, "Leap year");
+                    } else {
+                        // Show a JOptionPane with the message "Not a leap year"
+                        JOptionPane.showMessageDialog(btnCheckYear, "Not a leap year");
+                    }
+                } catch (NumberFormatException nfex) {
+                    JOptionPane.showMessageDialog(btnCheckYear, "Input should be a number.");
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(btnCheckYear, "Number should be greater than zero.");
                 }
-
-
-
             }
         });
     }
