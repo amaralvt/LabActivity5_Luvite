@@ -31,27 +31,36 @@ public class SimpleCalcGUI extends JFrame {
     }
 
     private void computeResult() {
-        int number1 = Integer.parseInt(tfNumber1.getText());
-        int number2 = Integer.parseInt(tfNumber2.getText());
-        char operator = cbOperations.getSelectedItem().toString().charAt(0);
+        try {
+            int number1 = Integer.parseInt(tfNumber1.getText());
+            int number2 = Integer.parseInt(tfNumber2.getText());
+            char operator = cbOperations.getSelectedItem().toString().charAt(0);
 
-        int result = 0;
-        switch (operator) {
-            case '+':
-                result = number1 + number2;
-                break;
-            case '-':
-                result = number1 - number2;
-                break;
-            case '*':
-                result = number1 * number2;
-                break;
-            case '/':
-                result = number1 / number2;
-                break;
-        }
+            /*if (number1 >= 'a' || number1 <= 'A'){
+                if (number2 >= 'a' || number2 <= 'A') {
+                    throw new Exception();
+                }
+            }*/
+            int result = 0;
+            switch (operator) {
+                case '+':
+                    result = number1 + number2;
+                    break;
+                case '-':
+                    result = number1 - number2;
+                    break;
+                case '*':
+                    result = number1 * number2;
+                    break;
+                case '/':
+                    result = number1 / number2;
+                    break;
+            }
 
             tfResult.setText(String.valueOf((result)));
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(btnCompute, "Input should be a number.");
+        }
 
     }
 
